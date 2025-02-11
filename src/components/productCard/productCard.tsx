@@ -4,26 +4,22 @@ import {
   // FaRegStar, 
   FaShoppingCart 
 } from "react-icons/fa";
-import { Item, } from "../../types/items";
+import { useAddItems } from "../customHooks/useAddItems";
 
 interface ProductCardProps {
   id: number;
   image: string;
   title: string;
   price: number;
-  handleAddItem: (item: Item) => void;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ 
   id,
   image, 
   title, 
-  price, 
-  handleAddItem, 
+  price,  
 }) => {
-  const handleClicked = () => {
-    handleAddItem({name: title, price, id }); 
-  }
+  const{handleClicked} = useAddItems();
 
   return (
     <div className="max-w-xs bg-white shadow-lg rounded-lg overflow-hidden border border-gray-200">
@@ -32,7 +28,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <p className="text-gray-600">${price.toLocaleString("en-US")}.00</p>
         <button 
           className="flex items-center justify-center w-full bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded mt-2 transition"
-          onClick={handleClicked}
+          onClick={() => handleClicked({ id, name: title, price })}
           >
           <FaShoppingCart className="mr-2" /> Añadir al carrito
         </button>

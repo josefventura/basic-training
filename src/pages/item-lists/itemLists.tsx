@@ -2,11 +2,8 @@ import { useState } from "react";
 import ProductCard from "../../components/productCard/productCard"
 import useItemLists from "./useItemLists";
 import { Pokemon } from "../../types/common";
-import { ItemListProps } from "../../types/items";
 
-
-
-const ItemLists = ( {handleAddItem}:ItemListProps) => {
+const ItemLists = () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [_, setLoading] = useState(false);
     const { pokemons } = useItemLists({
@@ -17,7 +14,8 @@ const ItemLists = ( {handleAddItem}:ItemListProps) => {
         {
           pokemons.map(
             (pokemon: Pokemon)=>
-              <ProductCard key={pokemon.id} 
+              <ProductCard 
+                key={pokemon.id} 
                 id={pokemon.id}
                 image={
                     pokemon.sprites? 
@@ -26,7 +24,6 @@ const ItemLists = ( {handleAddItem}:ItemListProps) => {
                   } 
                   title={pokemon.name} 
                   price={+pokemon.weight * 290} 
-                  handleAddItem={handleAddItem}
               /> 
           )
         }
